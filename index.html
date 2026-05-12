@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LUMINA | Immersive Digital Lens</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Helvetica Regular';
+            src: local('Helvetica'), local('Arial');
+        }
+
+        :root {
+            --font-sans: 'Helvetica Regular', 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: #0e0e0e;
+        }
+
+        .liquid-glass {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(64px);
+            -webkit-backdrop-filter: blur(64px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, 0) 60%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom scrollbar for the "Lens" aesthetic */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#474747",
+                        "secondary-container": "#474747",
+                        "on-primary-fixed-variant": "#454747",
+                        "tertiary-fixed": "#e2e2e2",
+                        "inverse-on-surface": "#313030",
+                        "secondary-fixed": "#e2e2e2",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#141313",
+                        "on-tertiary-container": "#636565",
+                        "outline-variant": "#444748",
+                        "surface-variant": "#353434",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#c6c6c6",
+                        "primary-fixed": "#e2e2e2",
+                        "outline": "#8e9192",
+                        "on-surface": "#e5e2e1",
+                        "on-primary": "#2f3131",
+                        "on-primary-container": "#636565",
+                        "tertiary": "#ffffff",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-dim": "#141313",
+                        "on-secondary": "#303030",
+                        "tertiary-container": "#e2e2e2",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "on-tertiary": "#2f3131",
+                        "on-secondary-container": "#b5b5b5",
+                        "on-surface-variant": "#c4c7c8",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#353434",
+                        "inverse-primary": "#5d5f5f",
+                        "surface-tint": "#c6c6c7",
+                        "background": "#141313",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#93000a",
+                        "primary": "#ffffff",
+                        "primary-container": "#e2e2e2"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "stack-xs": "4px",
+                        "stack-lg": "48px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    fontSize: {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<script src="https://unpkg.com/framer-motion@11.0.8/dist/framer-motion.js"></script></head>
+<body class="bg-background text-on-background antialiased overflow-x-hidden">
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-sm bg-surface/30 border-b border-white/10 backdrop-blur-[64px]">
+<div class="font-display-lg text-display-lg-mobile md:text-headline-md tracking-tighter text-primary">LUMINA</div>
+<div class="hidden md:flex items-center gap-stack-md">
+<a class="font-body-md text-body-md text-primary border-b border-primary pb-1" href="#">Discover</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Mission</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Concierge</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Gallery</a>
+</div>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-stack-md py-stack-sm rounded-full hover:opacity-90 active:scale-95 transition-all">
+            Inquire
+        </button>
+</nav>
+<main class="relative w-full min-h-[1177px] overflow-x-hidden flex flex-col items-center selection:bg-white/20 selection:text-white">
+<!-- Video Background Layer -->
+<video autoplay="" class="fixed inset-0 w-full h-full object-cover z-0 pointer-events-none" loop="" muted="" playsinline="">
+<source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260429_115004_d2f7e713-3932-4411-9436-b7446522c00a.mp4" type="video/mp4"/>
+</video>
+<!-- Overlay for Depth -->
+<div class="fixed inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 z-[1] pointer-events-none"></div>
+<!-- Hero Canvas -->
+<section class="relative z-10 w-full max-w-7xl px-margin-mobile md:px-margin-desktop pt-[307px] pb-stack-lg flex flex-col items-center text-center">
+<div class="inline-flex items-center gap-2 mb-stack-md px-stack-sm py-1 rounded-full liquid-glass border border-white/20 opacity-0 translate-y-4 transition-all duration-700 delay-100 ease-out">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-primary tracking-[0.2em]">NOW ADMITTING MEMBERS</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-md max-w-4xl tracking-tighter opacity-0 translate-y-8 transition-all duration-1000 delay-300 ease-out">
+                Refining the digital <span class="italic font-light">perspective.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-white/70 max-w-xl mb-stack-lg leading-relaxed opacity-0 translate-y-4 transition-all duration-700 delay-500 ease-out">
+                Experience an atmospheric collective where technology meets quiet luxury. A sanctuary for visionaries seeking technical precision and cinematic immersion.
+            </p>
+<div class="flex flex-col md:flex-row gap-gutter opacity-0 translate-y-4 transition-all duration-700 delay-700 ease-out">
+<button class="bg-white text-black font-label-caps text-label-caps px-10 py-5 rounded-full hover:bg-white/90 transition-all active:scale-95">
+                    START YOUR JOURNEY
+                </button>
+<button class="liquid-glass text-white font-label-caps text-label-caps px-10 py-5 rounded-full border border-white/30 hover:bg-white/10 transition-all active:scale-95">
+                    VIEW PORTFOLIO
+                </button>
+</div>
+</section>
+<!-- Bento Grid Section (Value Props) -->
+<section class="relative z-10 w-full max-w-7xl px-margin-mobile md:px-margin-desktop py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter mt-32">
+<div class="md:col-span-8 liquid-glass p-10 rounded-3xl min-h-[400px] flex flex-col justify-end group opacity-0 translate-y-4 transition-all duration-700 delay-700 ease-out opacity-0 translate-y-12 transition-all duration-1000 ease-[0.22,1,0.36,1]">
+<div class="mb-4">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="lens">lens</span>
+<h3 class="font-headline-md text-headline-md text-white mb-2">Cinematic Precision</h3>
+<p class="font-body-md text-body-md text-white/60 max-w-md">Our interfaces are crafted as optical layers, polishing the digital noise into a pristine, focused experience.</p>
+</div>
+</div>
+<div class="md:col-span-4 liquid-glass p-10 rounded-3xl min-h-[400px] flex flex-col justify-between opacity-0 translate-y-4 transition-all duration-700 delay-700 ease-out opacity-0 translate-y-12 transition-all duration-1000 ease-[0.22,1,0.36,1]">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-caps text-label-caps text-white/40">EST. 2024</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-white mb-2">Fluid Identity</h3>
+<p class="font-body-md text-body-md text-white/60">A living design system that adapts to your environment.</p>
+</div>
+</div>
+<div class="md:col-span-4 liquid-glass p-10 rounded-3xl min-h-[300px] border-white/5 opacity-0 translate-y-12 transition-all duration-1000 ease-[0.22,1,0.36,1]">
+<h3 class="font-headline-sm text-headline-sm text-white mb-4">The Collective</h3>
+<div class="flex -space-x-4">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young visionary creative director with sharp features, wearing a minimalist black turtleneck against a dark atmospheric studio background. The lighting is high-contrast, cinematic, and moody, emphasizing textures and shadows. Part of the Lumina brand aesthetic of quiet luxury and technical precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5Tec2Thp1tVoQnD-6GqhDvw2Nkmo360RHSelwKJP4XpPPowiakWh3lrSKuifR-arEHD-74WgJmp-ydUaAU195DpTngGpUPeW8mBrhHRvy1MqlEJWfQRUOh-oc4S06CeYYX3-DcTQMN1kr2xv5QtJ-5LhRdpXnjtCltjftcNnFXTPiiYKHoO8hSmjKhcAhuHpIoPY5LqDbVTnCUa9EMZUFtVlqSkavdBmiH2sN5rLOaBEWrert6G-3tIZ1nwb3PRMTCxXo4MX11O4"/>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a woman designer with professional styling, soft studio lighting highlighting a clean, modern aesthetic. The color palette is muted with deep blacks and subtle highlights, reflecting the Lumina brand's focus on technical precision and sophisticated digital artistry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDseLGEcLQHTZLGQJm6VdWx2Jc1rwOcmlMzHu1wOaSkN5CzD90GYFsplEu28JrMS6a-LETV9_O1Q8086V07fUBqPKKw2Yecdu-yXYDNsyUG9cVGJpLYHUPVB8DstagOhm0Wcy6jZqgivrfl-e02AgAEX_jffHUqg3VNEVBDkmVRTGcXmuvc-DB3IuyBRnDS8j8z3KB8tJBvLu-qbfrFUtgVQR9pkPi-tA7SB8YiBpc_cnSNzDQLO4IbRZ7A-IVO386hXIWKg4LOTUo"/>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-surface-container-high flex items-center justify-center bg-white/10">
+<span class="text-[10px] font-bold text-white">+24k</span>
+</div>
+</div>
+<p class="mt-6 font-body-md text-body-md text-white/50">Join thousands of global visionaries today.</p>
+</div>
+<div class="md:col-span-8 liquid-glass p-10 rounded-3xl min-h-[300px] flex items-center gap-10 overflow-hidden opacity-0 translate-y-12 transition-all duration-1000 ease-[0.22,1,0.36,1]">
+<div class="w-1/2">
+<h3 class="font-headline-md text-headline-md text-white mb-2">Concierge Access</h3>
+<p class="font-body-md text-body-md text-white/60">24/7 dedicated support for our elite tier members, ensuring your digital presence never fades.</p>
+</div>
+<div class="w-1/2 relative h-full">
+<div class="absolute inset-0 bg-primary/10 blur-[100px] rounded-full"></div>
+<span class="material-symbols-outlined text-[120px] text-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" data-icon="support_agent">support_agent</span>
+</div>
+</div>
+</section>
+<!-- Liquid Glass Footer -->
+<footer class="liquid-glass w-full rounded-t-[40px] p-6 md:p-10 text-white/70 mt-32 md:mt-64 relative z-10 mx-margin-mobile md:mx-margin-desktop max-w-[1440px] px-margin-mobile md:px-margin-desktop py-stack-lg opacity-0 transition-opacity duration-1000 ease-in-out">
+<div class="grid grid-cols-4 md:grid-cols-12 gap-gutter">
+<!-- Branding Section -->
+<div class="col-span-4 md:col-span-5 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<svg fill="none" height="32" viewbox="0 0 100 100" width="32" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z" fill="white" fill-opacity="0.9"></path>
+<path d="M50 20L75.9808 35V65L50 80L24.0192 65V35L50 20Z" fill="black"></path>
+</svg>
+<span class="text-xl font-medium tracking-widest text-primary">LUMINA</span>
+</div>
+<p class="font-body-md text-body-md text-white/50 leading-relaxed max-w-sm">
+                        Defining the boundary between digital and physical experience through high-fidelity design and cinematic atmospherics.
+                    </p>
+</div>
+<!-- Links Section -->
+<div class="col-span-4 md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+<div class="flex flex-col gap-stack-md">
+<h4 class="font-label-caps text-label-caps text-primary mb-2">Discover</h4>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Labs &amp; Workshops</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Deep Dive Series</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Global Circle</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Resource Vault</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Future Roadmap</a>
+</div>
+<div class="flex flex-col gap-stack-md">
+<h4 class="font-label-caps text-label-caps text-primary mb-2">The Mission</h4>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Origin Story</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">The Collective</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Newsroom Hub</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Join the Team</a>
+</div>
+<div class="flex flex-col gap-stack-md">
+<h4 class="font-label-caps text-label-caps text-primary mb-2">Concierge</h4>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Get in Touch</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Legal Privacy</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">User Agreement</a>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Report Concern</a>
+</div>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="mt-20 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="font-body-md text-[14px] text-white/40">
+                    Curated by @GotInGeorgiG
+                </div>
+<div class="flex items-center gap-8">
+<span class="font-label-caps text-[12px] text-white/40 uppercase tracking-widest">Join the Journey:</span>
+<div class="flex items-center gap-4 text-white/60">
+<span class="material-symbols-outlined text-[18px] cursor-pointer hover:text-primary transition-colors" data-icon="music_note">music_note</span>
+<span class="material-symbols-outlined text-[18px] cursor-pointer hover:text-primary transition-colors" data-icon="public">public</span>
+<span class="material-symbols-outlined text-[18px] cursor-pointer hover:text-primary transition-colors" data-icon="chat">chat</span>
+<span class="material-symbols-outlined text-[18px] cursor-pointer hover:text-primary transition-colors" data-icon="smart_display">smart_display</span>
+<span class="material-symbols-outlined text-[18px] cursor-pointer hover:text-primary transition-colors" data-icon="camera">camera</span>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<p class="font-label-caps text-[10px] text-white/20 tracking-[0.3em]">© 2024 LUMINA. ALL RIGHTS RESERVED.</p>
+</div>
+</footer>
+</main>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero Animation Trigger
+            setTimeout(() => {
+                document.querySelectorAll('section.relative.z-10.w-full.max-w-7xl > div, section.relative.z-10.w-full.max-w-7xl > h1, section.relative.z-10.w-full.max-w-7xl > p').forEach(el => {
+                    el.classList.remove('opacity-0', 'translate-y-4', 'translate-y-8');
+                });
+            }, 100);
+
+            // Intersection Observer for Bento Cards
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-12');
+                        }, index * 100); // Slight stagger between cards
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section.grid > div').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script><script>
+        const footerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0');
+                    footerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05 });
+        footerObserver.observe(document.querySelector('footer.liquid-glass'));
+    </script></body></html>
